@@ -4,9 +4,7 @@
   "description": "CLI tool to generate React components with TypeScript and SCSS",
   "main": "index.js",
   "bin": {
-    "react-component-cli": "./bin/index.js",
-    "react-cli": "./bin/index.js",
-    "react-gen": "./bin/index.js"
+    "react": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
