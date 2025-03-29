@@ -6,13 +6,13 @@ A Command line tool that generates React components with TypeScript and SCSS.
 
 Install with [npm](https://www.npmjs.com/):
 
-    npm install -g react-component-cli
+    npm i @mertjane/reactgen-component
 
 ## Usage
 
-    $ react-component-cli generate <component-name> [options]
+    $ react generate-component <component-name> [options]
     # Short version
-    $ react-cli g <component-name> [options]
+    $ react g-c <component-name> [options]
 
     Options:
       -p, --path      specify output path (default: "src/components")
@@ -32,19 +32,19 @@ This CLI generates the following files for each component:
 
 ### Generate a basic component
 
-    react-cli g Button
+    react g-c Button
 
 ### Generate in custom directory
 
-    react-cli g Button --path src/features
+    react g-c Button --path src/features
 
 ### Generate without styles
 
-    react-cli g Button --no-styles
+    react g-c Button --no-styles
 
 ### Generate flat structure
 
-    react-cli g Button --flat
+    react g-c Button --flat
     # Creates:
     # src/components/Button.tsx
     # src/components/Button.styles.scss
