@@ -1,6 +1,6 @@
 {
   "name": "@mertjane/reactgen-component",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "CLI tool to generate React components with TypeScript and SCSS",
   "main": "index.js",
   "bin": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublishOnly": ""
+    "prepublishOnly": "npm test"
   },
   "keywords": [
     "react",
@@ -24,7 +24,8 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^13.1.0",
-    "fs-extra": "^11.3.0"
+    "fs-extra": "^11.3.0",
+    "inquirer": "^12.5.0"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -40,8 +41,5 @@
   "bugs": {
     "url": "https://github.com/mertjane/react-component-cli/issues"
   },
-  "homepage": "https://github.com/mertjane/react-component-cli#readme",
-  "devDependencies": {
-    "jest": "^29.7.0"
-  }
+  "homepage": "https://github.com/mertjane/react-component-cli#readme"
 }
