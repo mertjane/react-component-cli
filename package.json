@@ -1,0 +1,46 @@
+{
+  "name": "react-component-cli",
+  "version": "1.0.0",
+  "description": "CLI tool to generate React components with TypeScript and SCSS",
+  "main": "index.js",
+  "bin": {
+    "react-component-cli": "./bin/index.js",
+    "react-cli": "./bin/index.js",
+    "react-gen": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "generator",
+    "cli",
+    "scaffolding",
+    "typescript",
+    "scss"
+  ],
+  "author": "@mert",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^13.1.0",
+    "fs-extra": "^11.3.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mertjane/react-component-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mertjane/react-component-cli/issues"
+  },
+  "homepage": "https://github.com/mertjane/react-component-cli#readme"
+}
