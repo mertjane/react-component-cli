@@ -4,18 +4,39 @@ const { program } = require("commander");
 const fs = require("fs-extra");
 const path = require("path");
 const chalk = require("chalk");
+const inquirer = require("inquirer").default;
 
 const configPath = path.join(__dirname, "../config.json");
 
-const getUserPreferences = () => {
+const getUserPreferences = async () => {
   if (fs.existsSync(configPath)) {
     return fs.readJsonSync(configPath);
   }
-  return { useTypescript: true, useSCSS: true }; // Default values
+
+  console.log(chalk.yellow("🔧 Config not found. Setting up preferences..."));
+
+  const answers = await inquirer.prompt([
+    {
+      type: "confirm",
+      name: "useTypescript",
+      message: "Do you want to use TypeScript by default?",
+      default: true,
+    },
+    {
+      type: "confirm",
+      name: "useSCSS",
+      message: "Do you want to use SCSS by default?",
+      default: true,
+    },
+  ]);
+
+  fs.writeFileSync(configPath, JSON.stringify(answers, null, 2), "utf8");
+  console.log(chalk.green("✔ Preferences saved!"));
+  return answers;
 };
 
-const generateComponent = (name) => {
-  const { useTypescript, useSCSS } = getUserPreferences();
+const generateComponent = async (name) => {
+  const { useTypescript, useSCSS } = await getUserPreferences();
 
   const srcDir = path.join(process.cwd(), "src");
   const componentsDir = path.join(srcDir, "components");
