@@ -1,13 +1,14 @@
 {
   "name": "@mertjane/reactgen-component",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI tool to generate React components with TypeScript and SCSS",
   "main": "index.js",
   "bin": {
     "react": "./bin/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node bin/setup.js"
   },
   "keywords": [
     "react",

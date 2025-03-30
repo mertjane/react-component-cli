@@ -4,26 +4,18 @@ const { program } = require("commander");
 const fs = require("fs-extra");
 const path = require("path");
 const chalk = require("chalk");
-const inquirer = require("inquirer").default; // Fix for latest inquirer
 
-const generateComponent = async (name) => {
-  const answers = await inquirer.prompt([
-    {
-      type: "confirm",
-      name: "useTypescript",
-      message: "Do you want to use TypeScript?",
-      default: true,
-    },
-    {
-      type: "confirm",
-      name: "useSCSS",
-      message: "Do you want to use SCSS?",
-      default: true,
-    },
-  ]);
+const configPath = path.join(__dirname, "../config.json");
 
-  const useTypescript = answers.useTypescript;
-  const useSCSS = answers.useSCSS;
+const getUserPreferences = () => {
+  if (fs.existsSync(configPath)) {
+    return fs.readJsonSync(configPath);
+  }
+  return { useTypescript: true, useSCSS: true }; // Default values
+};
+
+const generateComponent = (name) => {
+  const { useTypescript, useSCSS } = getUserPreferences();
 
   const srcDir = path.join(process.cwd(), "src");
   const componentsDir = path.join(srcDir, "components");
@@ -40,8 +32,14 @@ const generateComponent = async (name) => {
 
   fs.mkdirSync(componentDir);
 
-  const componentFile = path.join(componentDir, `${name}.${useTypescript ? "tsx" : "jsx"}`);
-  const stylesFile = path.join(componentDir, `${name}.styles.${useSCSS ? "scss" : "css"}`);
+  const componentFile = path.join(
+    componentDir,
+    `${name}.${useTypescript ? "tsx" : "jsx"}`
+  );
+  const stylesFile = path.join(
+    componentDir,
+    `${name}.styles.${useSCSS ? "scss" : "css"}`
+  );
   const typesFile = path.join(componentDir, `${name}.types.ts`);
 
   const componentTemplate = `import React from "react";
@@ -63,12 +61,16 @@ export default ${name};
 
   fs.writeFileSync(componentFile, componentTemplate);
   fs.writeFileSync(stylesFile, stylesTemplate);
-  
+
   if (useTypescript) {
     fs.writeFileSync(typesFile, typesTemplate);
   }
 
-  console.log(chalk.green(`Component "${name}" created successfully in src/components/${name}/`));
+  console.log(
+    chalk.green(
+      `Component "${name}" created successfully in src/components/${name}/`
+    )
+  );
 };
 
 program
