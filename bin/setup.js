@@ -23,7 +23,7 @@ const chalk = require("chalk");
 
   const configPath = path.join(__dirname, "../config.json");
 
-  fs.writeJsonSync(configPath, answers, { spaces: 2 });
+  fs.writeFileSync(configPath, JSON.stringify(answers, null, 2));
 
   console.log(chalk.green("✔ Preferences saved! You won't be asked again."));
 })();
