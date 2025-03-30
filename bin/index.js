@@ -8,8 +8,10 @@ const inquirer = require("inquirer").default;
 
 const configPath = path.join(__dirname, "../config.json");
 
-
-// Getting user preferences in first use
+/**
+ * Retrieves user preferences for TypeScript and SCSS usage.
+ * If preferences do not exist, prompts the user and saves the configuration.
+ */
 const getUserPreferences = async () => {
   if (fs.existsSync(configPath)) {
     return fs.readJsonSync(configPath);
@@ -37,8 +39,10 @@ const getUserPreferences = async () => {
   return answers;
 };
 
-
-// Generate react component
+/**
+ * Generates a new React component with optional TypeScript and SCSS.
+ * @param {string} name - Component name
+ */
 const generateComponent = async (name) => {
   const { useTypescript, useSCSS } = await getUserPreferences();
 
@@ -67,7 +71,6 @@ const generateComponent = async (name) => {
   );
   const typesFile = path.join(componentDir, `${name}.types.ts`);
 
-
   // React component template
   const componentTemplate = `import React from "react";
 import "./${name}.styles.${useSCSS ? "scss" : "css"}";
@@ -80,10 +83,10 @@ const ${name}: React.FC${useTypescript ? `<${name}Props>` : ""} = () => {
 export default ${name};
 `;
 
+  // styles template
   const stylesTemplate = `.${name.toLowerCase()} {
   /* Add your styles here */
 }`;
-
 
   // types.ts template
   const typesTemplate = `export interface ${name}Props {}`;
@@ -108,25 +111,32 @@ program
   .alias("g-c")
   .action(generateComponent);
 
-/**=================================================================**/
+/**
+ * Generates a React Context with Provider and Hook.
+ * @param {string} name - Context name
+ */
 
-  const generateContext = (name) => {
-    const { useTypescript } = getUserPreferences(); // Use TS preference
-  
-    const srcDir = path.join(process.cwd(), "src");
-    const contextDir = path.join(srcDir, "context");
-    const contextFile = path.join(contextDir, `${name}.${useTypescript ? "tsx" : "jsx"}`);
-  
-    if (!fs.existsSync(contextDir)) {
-      fs.mkdirSync(contextDir, { recursive: true });
-    }
-  
-    if (fs.existsSync(contextFile)) {
-      console.log(chalk.red(`Context "${name}" already exists.`));
-      return;
-    }
-  
-    const contextTemplate = `import React, { createContext, useContext, useState, ReactNode } from "react";
+const generateContext = (name) => {
+  const { useTypescript } = getUserPreferences(); // Use TS preference
+
+  const srcDir = path.join(process.cwd(), "src");
+  const contextDir = path.join(srcDir, "context");
+  const contextFile = path.join(
+    contextDir,
+    `${name}.${useTypescript ? "tsx" : "jsx"}`
+  );
+
+  if (!fs.existsSync(contextDir)) {
+    fs.mkdirSync(contextDir, { recursive: true });
+  }
+
+  if (fs.existsSync(contextFile)) {
+    console.log(chalk.red(`Context "${name}" already exists.`));
+    return;
+  }
+
+  // Context API template
+  const contextTemplate = `import React, { createContext, useContext, useState, ReactNode } from "react";
   
   interface ${name}Props {
     state: string;
@@ -153,17 +163,20 @@ program
     return context;
   };
   `;
-  
-    fs.writeFileSync(contextFile, contextTemplate);
-    console.log(chalk.green(`Context "${name}" created successfully in src/context/${name}/`));
-  };
-  
-  // Add the command in `program`
-  program
-    .command("generate-context <name>")
-    .description("Generate a new React Context with a Provider")
-    .alias("g-ctx")
-    .action(generateContext);
-  
+
+  fs.writeFileSync(contextFile, contextTemplate);
+  console.log(
+    chalk.green(
+      `Context "${name}" created successfully in src/context/${name}/`
+    )
+  );
+};
+
+// Add the command in `program`
+program
+  .command("generate-context <name>")
+  .description("Generate a new React Context with a Provider")
+  .alias("g-ctx")
+  .action(generateContext);
 
 program.parse(process.argv);
