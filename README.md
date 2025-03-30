@@ -22,11 +22,11 @@ v8.16.0
 
 Install with [npm](https://www.npmjs.com/):
 
-    npm i @mertjane/reactgen-component
+    npm i reactgen-component-cli
 
 for Globally installation:
 
-    npm install -g @mertjane/reactgen-component
+    npm install -g reactgen-component-cli
 
 ## Usage
     
@@ -102,4 +102,4 @@ Publish to npm:
 
 ## License
 
-MIT © mert
+MIT © mertjane
