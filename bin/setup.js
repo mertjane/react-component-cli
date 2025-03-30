@@ -6,7 +6,7 @@ const inquirer = require("inquirer");
 const chalk = require("chalk");
 
 (async () => {
-  const answers = await inquirer.createPromptModule([
+  const answers = await inquirer.prompt([
     {
       type: "confirm",
       name: "useTypescript",
@@ -23,7 +23,8 @@ const chalk = require("chalk");
 
   const configPath = path.join(__dirname, "../config.json");
 
-  fs.writeFileSync(configPath, JSON.stringify(answers, null, 2));
+  fs.writeFileSync(configPath, JSON.stringify(answers, null, 2), "utf8");
+
 
   console.log(chalk.green("✔ Preferences saved! You won't be asked again."));
 })();
