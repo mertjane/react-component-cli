@@ -1,6 +1,6 @@
 {
   "name": "@mertjane/reactgen-component",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "CLI tool to generate React components with TypeScript and SCSS",
   "main": "index.js",
   "bin": {
