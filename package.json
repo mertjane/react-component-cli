@@ -1,5 +1,5 @@
 {
-  "name": "reactgen-component",
+  "name": "reactgen-component-cli",
   "version": "1.0.13",
   "description": "CLI tool to generate React components with TypeScript and SCSS",
   "main": "index.js",
