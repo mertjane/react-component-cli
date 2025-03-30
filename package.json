@@ -1,5 +1,5 @@
 {
-  "name": "@mertjane/reactgen-component",
+  "name": "reactgen-component",
   "version": "1.0.12",
   "description": "CLI tool to generate React components with TypeScript and SCSS",
   "main": "index.js",
@@ -18,7 +18,7 @@
     "typescript",
     "scss"
   ],
-  "author": "@mert",
+  "author": "@mertjane",
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
